@@ -15,12 +15,10 @@ import android.widget.Button;
 public class MenuFragment extends Fragment {
     private View view;
 
-    // /*
     private Button Btn_livingroom;
     private Button Btn_innerroom;
     private Button Btn_lavatory;
     private Button Btn_kitchen;
-    // */
 
     @Nullable
     @Override
@@ -28,7 +26,6 @@ public class MenuFragment extends Fragment {
                              @Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        // /*
         Btn_livingroom = view.findViewById(R.id.btn_livingroom);
         Btn_livingroom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +69,6 @@ public class MenuFragment extends Fragment {
                 transaction.commit();
             }
         });
-        // */
 
 
         return view;
