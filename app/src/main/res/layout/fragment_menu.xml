@@ -6,38 +6,68 @@
     tools:context=".MenuFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <Button
-        android:id="@+id/btn_livingroom"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#0095FF"
-        android:textSize="25dp"
-        android:text="거실" />
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_innerroom"
+        <Button
+            android:id="@+id/btn_livingroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="#0095FF"
+            android:layout_weight="1"
+            android:text="거실"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/btn_innerroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="#0095FF"
+            android:layout_weight="1"
+            android:text="안방"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#0095FF"
-        android:textSize="25dp"
-        android:text="안방" />
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_lavatory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#0095FF"
-        android:textSize="25dp"
-        android:text="화장실" />
+        <Button
+            android:id="@+id/btn_lavatory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:backgroundTint="#0095FF"
+            android:layout_weight="1"
+            android:text="화장실"
+            android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/btn_kitchen"
+        <Button
+            android:id="@+id/btn_kitchen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="#0095FF"
+            android:layout_weight="1"
+            android:text="주방"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/framelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#0095FF"
-        android:textSize="25dp"
-        android:text="주방" />
+        android:layout_height="match_parent"/>
 </LinearLayout>
