@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmarthomeApp">
         <activity
-            android:name=".livingroom"
-            android:exported="false" />
-        <activity
             android:name=".LoadingActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
