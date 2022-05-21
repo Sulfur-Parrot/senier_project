@@ -2,63 +2,75 @@ package com.example.smarthomeapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MenuFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MenuFragment extends Fragment {
+    private View view;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private Button Btn_livingroom;
+    private Button Btn_innerroom;
+    private Button Btn_lavatory;
+    private Button Btn_kitchen;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MenuFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MenuFragment newInstance(String param1, String param2) {
-        MenuFragment fragment = new MenuFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(@Nullable LayoutInflater inflater,
+                             @Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        Btn_livingroom = view.findViewById(R.id.btn_livingroom);
+        Btn_livingroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                LivingroomFragment livingroomFragment = new LivingroomFragment();
+                transaction.replace(R.id.framelayout, livingroomFragment);
+                transaction.commit();
+            }
+        });
+
+        Btn_innerroom = view.findViewById(R.id.btn_innerroom);
+        Btn_innerroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                InnerroomFragment innerroomFragment = new InnerroomFragment();
+                transaction.replace(R.id.framelayout, innerroomFragment);
+                transaction.commit();
+            }
+        });
+
+        Btn_lavatory = view.findViewById(R.id.btn_lavatory);
+        Btn_lavatory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                LavatoryFragment lavatoryFragment = new LavatoryFragment();
+                transaction.replace(R.id.framelayout, lavatoryFragment);
+                transaction.commit();
+            }
+        });
+
+        Btn_kitchen = view.findViewById(R.id.btn_kitchen);
+        Btn_kitchen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                KitchenFragment kitchenFragment = new KitchenFragment();
+                transaction.replace(R.id.framelayout, kitchenFragment);
+                transaction.commit();
+            }
+        });
+
+
+        return view;
     }
 }

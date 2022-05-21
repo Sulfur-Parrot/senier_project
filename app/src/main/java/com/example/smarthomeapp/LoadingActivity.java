@@ -21,7 +21,7 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //new Intent(현재 context, 이동할 activity)
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 
                 startActivity(intent);  //intent에 명시한 액티비티로 이동
 
