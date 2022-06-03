@@ -10,13 +10,30 @@
         <entry key="..\:/Users/SulfurParrot/AndroidStudioProjects/SmarthomeApp/app/src/main/res/layout/fragment_setting.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/SulfurParrot/AndroidStudioProjects/SmarthomeApp/app/src/main/res/menu/bottom_menu.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/SulfurParrot/AndroidStudioProjects/SmarthomeApp/app/src/main/res/xml/preference.xml" value="0.17916666666666667" />
-        <entry key="..\:/Users/user/Documents/GitHub/senier_project/app/src/main/res/layout/activity_loading.xml" value="0.16473259334006055" />
-        <entry key="..\:/Users/user/Documents/GitHub/senier_project/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/user/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_menu.xml" value="0.16271442986881937" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/drawable/round_button.xml" value="0.1875" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_livingroom.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_loading.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_main.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_main2.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_menu.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/activity_register.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/exercise.xml" value="0.14615384615384616" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_home.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_innerroom.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_kitchen.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_lavatory.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_livingroom.xml" value="0.16458333333333333" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_menu.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_setting.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/fragment_viewer.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/layout/living_room.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/menu/bottom_menu.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/SulfurParrot/Documents/GitHub/senier_project/app/src/main/res/xml/settings_preference.xml" value="0.16666666666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
