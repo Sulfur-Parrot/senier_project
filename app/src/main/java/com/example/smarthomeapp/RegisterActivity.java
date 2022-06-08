@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_pass = findViewById(R.id.et_pass);
 
         // 회원가입 버튼 클릭 시 수행
-        btn_register = findViewById(R.id.btn_register);
+        btn_register = findViewById(R.id.login_register);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
