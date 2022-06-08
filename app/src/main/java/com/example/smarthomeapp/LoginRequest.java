@@ -1,30 +1,29 @@
 package com.example.smarthomeapp;
 
-import com.google.gson.annotations.SerializedName;
 
-public class LoginRequest {
-    @SerializedName("id")
-    public String email;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
-    @SerializedName("password")
-    public String passwd;
+import java.util.HashMap;
+import java.util.Map;
 
-    public String getEmail(){
-        return email;
+public class LoginRequest extends StringRequest {
+
+    //서버 url 설정(php파일 연동)
+    final static private String URL = "http://192.168.43.194/login.php";
+    private Map<String, String> map;
+
+    public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
+
+        map = new HashMap<>();
+        map.put("email", userID);
+        map.put("password", userPassword);
     }
-    public String getPasswd(){
-        return passwd;
-    }
 
-    public void setEmail(String email){
-        this.email = email;
-    }
-    public void setPasswd(String passwd){
-        this.passwd = passwd;
-    }
-
-    public LoginRequest(String email, String passwd){
-        this.email = email;
-        this.passwd = passwd;
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return map;
     }
 }

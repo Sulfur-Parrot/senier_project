@@ -13,7 +13,7 @@
         android:layout_marginTop="300dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="아이디"
+        android:hint="E-mail"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,14 +27,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPersonName"
+        android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_id"/>
 
     <Button
-        android:id="@+id/login_loginbtn"
+        android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -45,14 +45,14 @@
         app:layout_constraintTop_toBottomOf="@+id/login_password"/>
 
     <Button
-        android:id="@+id/login_register"
+        android:id="@+id/login_btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="@+id/login_loginbtn"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/login_loginbtn"
-        app:layout_constraintTop_toBottomOf="@+id/login_loginbtn" />
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
