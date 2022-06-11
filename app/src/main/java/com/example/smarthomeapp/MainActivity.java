@@ -3,6 +3,9 @@ package com.example.smarthomeapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -59,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.home_ly, new SettingFragment())
                             .commit();
                     return true;
+                }
+                case R.id.tab_logout: {
+                    SharedPreferences sharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
+                    autoLoginEdit.clear();
+                    autoLoginEdit.apply();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
             }
             return false;

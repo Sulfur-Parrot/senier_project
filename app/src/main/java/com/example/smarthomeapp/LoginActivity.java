@@ -1,11 +1,14 @@
 package com.example.smarthomeapp;
 
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private EditText et_id, et_pass;
     private Button btn_login, btn_register;
+    private String auto_id, auto_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,19 @@ public class LoginActivity extends AppCompatActivity {
         et_pass = findViewById(R.id.login_password);
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.login_btn_register);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
+
+        auto_id = sharedPreferences.getString("email", null);
+        auto_pass = sharedPreferences.getString("password", null);
+
+        if(auto_id != null && auto_pass != null) {
+            Toast.makeText(getApplicationContext(), "자동 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+
 
         //회원가입 버튼 클릭 시 수행
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if(success) {//로그인에 성공한 경우
-                                //String userID = jsonObject.getString("email");
-                                //String userPass = jsonObject.getString("password");
+                                //자동 로그인데이터 저장
+                                autoLoginEdit.putString("email", userID);
+                                autoLoginEdit.putString("password", userPass);
+                                autoLoginEdit.apply();
 
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -78,5 +97,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        }
     }
+}
