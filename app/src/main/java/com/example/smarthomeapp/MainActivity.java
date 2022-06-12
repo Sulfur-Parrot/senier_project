@@ -16,6 +16,10 @@ import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 public class MainActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
 
+    private BackKeyHandler backKeyHandler = new BackKeyHandler(this);
+
+    LoginActivity loginActivity = (LoginActivity)LoginActivity.loginActivity;
+
     LinearLayout home_ly;
     BottomNavigationView bottomNavigationView;
 
@@ -23,12 +27,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loginActivity.finish();
 
         init(); //객체 정의
         SettingListener(); //리스너 등록
 
         //처음 시작할 탭 설정
         bottomNavigationView.setSelectedItemId(R.id.tab_home);
+    }
+
+    //뒤로 키 2번 누르면 종료
+    @Override
+    public void onBackPressed() {
+        backKeyHandler.onBackPressed();
     }
 
     private void init() {
