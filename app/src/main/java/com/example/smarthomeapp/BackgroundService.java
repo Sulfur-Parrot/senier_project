@@ -7,11 +7,25 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+
+
 public class BackgroundService extends Service {
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(intent == null){
@@ -36,12 +50,55 @@ public class BackgroundService extends Service {
                 .build();
 
         startForeground(1, notification);
-
+        Handler handler = new Handler();
         new Thread(new Runnable() {
+
             @Override
             public void run() {
                 //여기에 지속적으로 돌아가야할 작업을 넣는다
+                while(true) {
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                System.out.println(response);
+                                JSONObject jsonObject = new JSONObject(response);
 
+                                //room_sensor
+                                JSONArray roomArray = jsonObject.getJSONArray("room_sensor");
+                                JSONObject roomObject = roomArray.getJSONObject(0);
+                                String room = roomObject.getString("result");
+                                //kitchen_sensor
+                                JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
+                                JSONObject kitchenObject = kitchenArray.getJSONObject(0);
+                                String kitchen = kitchenObject.getString("result");
+                                //toilet_sensor
+                                JSONArray toiletArray = jsonObject.getJSONArray("toilet_sensor");
+                                JSONObject toiletObject = toiletArray.getJSONObject(0);
+                                String toilet = toiletObject.getString("result");
+
+
+                                if (room.equals("0") || kitchen.equals("0") || toilet.equals("0")) {
+                                    //System.out.println("~평상시~ " + " 방: " + room + " 주방: " + kitchen + " 화장실: " + toilet);
+                                } else {
+                                    //System.out.println("!!경고!!" + " 방: " + room + " 주방: " + kitchen + " 화장실: " + toilet);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+
+                    SensorResultRequest sensorResultRequest = new SensorResultRequest(responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(BackgroundService.this);
+                    queue.add(sensorResultRequest);
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }).start();
 
@@ -57,3 +114,4 @@ public class BackgroundService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }
+
