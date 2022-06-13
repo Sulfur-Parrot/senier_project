@@ -1,11 +1,13 @@
 package com.example.smarthomeapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout home_ly;
     BottomNavigationView bottomNavigationView;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
         //처음 시작할 탭 설정
         bottomNavigationView.setSelectedItemId(R.id.tab_home);
+
+        //앱을 실행한 후 나가더라도 계속 돌아가는 부분
+        Intent intent = new Intent(this, BackgroundService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        }
     }
 
     //뒤로 키 2번 누르면 종료
