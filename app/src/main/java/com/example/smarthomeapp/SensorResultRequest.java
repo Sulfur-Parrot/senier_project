@@ -8,6 +8,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+//백그라운드에서 센서에서 비정상적인 값 감지되었을 때 알림 울리기
 public class SensorResultRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
