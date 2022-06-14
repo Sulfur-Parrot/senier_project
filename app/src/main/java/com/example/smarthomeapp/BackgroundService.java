@@ -30,7 +30,7 @@ public class BackgroundService extends Service {
 
     String CHANNEL_ID = "CHANNEL_ID";
     String result1 = "0", result2 = "0";
-    String a;
+    String r , k , t ;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -56,7 +56,6 @@ public class BackgroundService extends Service {
                 .build();
 
         startForeground(1, notification);
-        Handler handler = new Handler();
         new Thread(new Runnable() {
 
             @Override
@@ -64,12 +63,15 @@ public class BackgroundService extends Service {
                 //여기에 지속적으로 돌아가야할 작업을 넣는다
 
                 while(true) {
+                    r = "";
+                    k = "";
+                    t = "";
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
                                 result2 = result1;
-                                System.out.println(response);
+                                // System.out.println(response);
                                 JSONObject jsonObject = new JSONObject(response);
 
                                 //room_sensor
@@ -88,15 +90,18 @@ public class BackgroundService extends Service {
                                 if (room.equals("1") || kitchen.equals("1") || toilet.equals("1")) {
                                     //System.out.println("!!경고!! " + " 방: " + room + " 주방: " + kitchen + " 화장실: " + toilet);
                                     if(room.equals("1")){
-                                        a = "방";
-                                    } else if(kitchen.equals("1")){
-                                        a = "주방";
-                                    } else if(toilet.equals("1")){
-                                        a = "화장실";
+                                        r = "방";
                                     }
+                                    if(kitchen.equals("1")){
+                                        k = "주방";
+                                    }
+                                    if(toilet.equals("1")){
+                                        t = "화장실";
+                                    }
+
                                     result1 = "1";
                                     if (result2.equals("0")) {
-                                        sendNotification(a);
+                                        sendNotification(r, k, t);
                                     }
                                 } else {
                                     result1 = "0";
@@ -133,13 +138,13 @@ public class BackgroundService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public void sendNotification(String a) {
+    public void sendNotification(String a, String b, String c) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         builder.setSmallIcon(R.drawable.ic_siren)
                 .setContentTitle("경고!")
-                .setContentText(a + " 에서 비정상적인 수치가 감지되었습니다!")
+                .setContentText("비정상적인 수치가 감지되었습니다!("+r+" "+k+" "+t+")")
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(1, builder.build());

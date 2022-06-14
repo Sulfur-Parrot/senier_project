@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LavatoryFragment">
+    tools:context=".ToiletFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="lavatory"/>
+        android:text="Toilet"/>
 
-    <ImageView
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/toilet_chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/graph"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

@@ -16,8 +16,8 @@ public class MenuFragment extends Fragment {
     private View view;
 
     private Button Btn_livingroom;
-    private Button Btn_innerroom;
-    private Button Btn_lavatory;
+    private Button Btn_room;
+    private Button Btn_toilet;
     private Button Btn_kitchen;
 
     @Nullable
@@ -37,24 +37,24 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        Btn_innerroom = view.findViewById(R.id.btn_innerroom);
-        Btn_innerroom.setOnClickListener(new View.OnClickListener() {
+        Btn_room = view.findViewById(R.id.btn_innerroom);
+        Btn_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                InnerroomFragment innerroomFragment = new InnerroomFragment();
-                transaction.replace(R.id.framelayout, innerroomFragment);
+                RoomFragment roomFragment = new RoomFragment();
+                transaction.replace(R.id.framelayout, roomFragment);
                 transaction.commit();
             }
         });
 
-        Btn_lavatory = view.findViewById(R.id.btn_lavatory);
-        Btn_lavatory.setOnClickListener(new View.OnClickListener() {
+        Btn_toilet = view.findViewById(R.id.btn_lavatory);
+        Btn_toilet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                LavatoryFragment lavatoryFragment = new LavatoryFragment();
-                transaction.replace(R.id.framelayout, lavatoryFragment);
+                ToiletFragment toiletFragment = new ToiletFragment();
+                transaction.replace(R.id.framelayout, toiletFragment);
                 transaction.commit();
             }
         });

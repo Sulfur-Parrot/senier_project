@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import com.github.mikephil.charting.charts.LineChart;
 
 
-public class KitchenFragment extends Fragment {
+public class ToiletFragment extends Fragment {
     private LineChart lineChart;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_kitchen, container, false);
+        return inflater.inflate(R.layout.fragment_toilet, container, false);
     }
 }
