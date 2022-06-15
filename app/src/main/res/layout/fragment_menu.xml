@@ -26,7 +26,7 @@
             android:textSize="25dp" />
 
         <Button
-            android:id="@+id/btn_innerroom"
+            android:id="@+id/btn_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -34,7 +34,7 @@
             android:layout_marginLeft="5dp"
             android:backgroundTint="#0095FF"
             android:layout_weight="1"
-            android:text="안방"
+            android:text="방"
             android:textSize="25dp" />
     </LinearLayout>
 
@@ -46,7 +46,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_lavatory"
+            android:id="@+id/btn_toilet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"

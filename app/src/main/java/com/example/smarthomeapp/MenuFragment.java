@@ -37,7 +37,7 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        Btn_room = view.findViewById(R.id.btn_innerroom);
+        Btn_room = view.findViewById(R.id.btn_room);
         Btn_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +48,7 @@ public class MenuFragment extends Fragment {
             }
         });
 
-        Btn_toilet = view.findViewById(R.id.btn_lavatory);
+        Btn_toilet = view.findViewById(R.id.btn_toilet);
         Btn_toilet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

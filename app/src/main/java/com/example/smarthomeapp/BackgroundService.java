@@ -89,20 +89,13 @@ public class BackgroundService extends Service {
 
                                 if (room.equals("1") || kitchen.equals("1") || toilet.equals("1")) {
                                     //System.out.println("!!경고!! " + " 방: " + room + " 주방: " + kitchen + " 화장실: " + toilet);
-                                    if(room.equals("1")){
-                                        r = "방";
-                                    }
-                                    if(kitchen.equals("1")){
-                                        k = "주방";
-                                    }
-                                    if(toilet.equals("1")){
-                                        t = "화장실";
-                                    }
+                                    if(room.equals("1")) {r = "방";}
+                                    if(kitchen.equals("1")) {k = "주방";}
+                                    if(toilet.equals("1")){t = "화장실";}
 
                                     result1 = "1";
-                                    if (result2.equals("0")) {
-                                        sendNotification(r, k, t);
-                                    }
+                                    if (result2.equals("0")) {sendNotification(r, k, t);}
+
                                 } else {
                                     result1 = "0";
                                 }
