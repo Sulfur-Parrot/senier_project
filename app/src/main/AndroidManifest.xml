@@ -3,7 +3,7 @@
     package="com.example.smarthomeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -13,13 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmarthomeApp"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
 
         <service
             android:name=".BackgroundService"
             android:enabled="true"
             android:exported="true"
-            android:process=":backgroundservice">
-        </service>
+            android:process=":backgroundservice" />
 
         <activity
             android:name=".LoginActivity"

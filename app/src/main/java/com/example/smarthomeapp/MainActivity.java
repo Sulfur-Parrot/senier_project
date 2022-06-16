@@ -11,16 +11,22 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
 
     private BackKeyHandler backKeyHandler = new BackKeyHandler(this);
-
-    LoginActivity loginActivity = (LoginActivity)LoginActivity.loginActivity;
 
     LinearLayout home_ly;
     BottomNavigationView bottomNavigationView;
@@ -30,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginActivity.finish();
 
         init(); //객체 정의
         SettingListener(); //리스너 등록
@@ -43,6 +48,50 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent);
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                System.out.println(response);
+                                JSONObject jsonObject = new JSONObject(response);
+
+
+                                JSONArray roomArray = jsonObject.getJSONArray("room_sensor");
+                                JSONObject roomObject = roomArray.getJSONObject(9);
+                                String room_r = roomObject.getString("result");
+
+                                JSONArray toiletArray = jsonObject.getJSONArray("toilet_sensor");
+                                JSONObject toiletObject = toiletArray.getJSONObject(9);
+                                String toilet_r = toiletObject.getString("result");
+
+                                JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
+                                JSONObject kitchenObject = kitchenArray.getJSONObject(9);
+                                String kitchen_r = kitchenObject.getString("result");
+
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                    queue.add(sensorMeasureRequest);
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     //뒤로 키 2번 누르면 종료
@@ -72,24 +121,14 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 case R.id.tab_menu: {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, new MenuFragment())
-                            .commit();
-                    return true;
+                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                    startActivity(intent);
                 }
                 case R.id.tab_setting: {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.home_ly, new SettingFragment())
                             .commit();
                     return true;
-                }
-                case R.id.tab_logout: {
-                    SharedPreferences sharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
-                    autoLoginEdit.clear();
-                    autoLoginEdit.apply();
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(intent);
                 }
             }
             return false;

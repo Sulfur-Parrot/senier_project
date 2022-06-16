@@ -18,10 +18,4 @@
         android:enabled="true"
         android:icon="@drawable/ic_settings"
         android:title="Setting" />
-
-    <item
-        android:id="@+id/tab_logout"
-        android:enabled="true"
-        android:icon="@drawable/ic_logout"
-        android:title="Logout" />
 </menu>
