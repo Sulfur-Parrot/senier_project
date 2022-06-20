@@ -8,4 +8,6 @@ public class BaseResponse {
 
     @SerializedName("msg")
     public String message;
+
+
 }

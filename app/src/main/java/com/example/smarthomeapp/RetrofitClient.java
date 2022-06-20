@@ -27,4 +27,7 @@ public class RetrofitClient {
     public static API getRetrofitInterface() {
         return API;
     }
+
+
+    //필요 없는 자파 파일
 }

@@ -30,4 +30,4 @@ public class LoginResponse {
     public void setStaff(String staff) {
         this.staff = staff;
     }
-}
+} //필요 없을 듯?

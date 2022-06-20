@@ -11,7 +11,6 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.schedulers.Schedulers;
@@ -100,6 +99,7 @@ public class RetroClient {
             return in.nextString();
         }
     }
+    //코드 끝
 }
 
 
