@@ -56,13 +56,13 @@
             android:text="생활안전요령"
             android:textSize="20dp" />
         <Button
-            android:id="@+id/btn_fall"
+            android:id="@+id/btn_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:backgroundTint="#0095FF"
             android:layout_weight="1"
-            android:text="낙상사고 예방"
+            android:text="새로고침"
             android:textSize="20dp" />
     </LinearLayout>
 
@@ -75,8 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:textSize="15dp"
-            android:textColor="@color/black"
-            android:hint="최근경고(방)"/>
+            android:hint="새로고침을 누를 시 최근 경고 표시"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,8 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:textSize="15dp"
-            android:textColor="@color/black"
-            android:hint="최근경고(화장실)"/>
+            android:hint="새로고침을 누를 시 최근 경고 표시"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
@@ -101,8 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:textSize="15dp"
-            android:textColor="@color/black"
-            android:hint="최근경고(주방)"/>
+            android:hint="새로고침을 누를 시 최근 경고 표시"
+            android:textColor="@color/black" />
     </LinearLayout>
 
 </LinearLayout>

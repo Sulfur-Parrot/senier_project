@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.app.NotificationCompat;
@@ -29,7 +30,6 @@ import java.lang.reflect.Array;
 public class BackgroundService extends Service {
 
     String CHANNEL_ID = "CHANNEL_ID";
-    String result1 = "0", result2 = "0";
     String r , k , t ;
 
     @Override
@@ -61,8 +61,8 @@ public class BackgroundService extends Service {
             @Override
             public void run() {
                 //여기에 지속적으로 돌아가야할 작업을 넣는다
-
                 while(true) {
+                    String[] times = {"null", "null", "null"};
                     r = "";
                     k = "";
                     t = "";
@@ -70,7 +70,6 @@ public class BackgroundService extends Service {
                         @Override
                         public void onResponse(String response) {
                             try {
-                                result2 = result1;
                                 // System.out.println(response);
                                 JSONObject jsonObject = new JSONObject(response);
 
@@ -78,30 +77,50 @@ public class BackgroundService extends Service {
                                 JSONArray roomArray = jsonObject.getJSONArray("room_sensor");
                                 JSONObject roomObject = roomArray.getJSONObject(0);
                                 String room = roomObject.getString("result");
-                                //kitchen_sensor
-                                JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
-                                JSONObject kitchenObject = kitchenArray.getJSONObject(0);
-                                String kitchen = kitchenObject.getString("result");
+                                String rtime = roomObject.getString("time");
                                 //toilet_sensor
                                 JSONArray toiletArray = jsonObject.getJSONArray("toilet_sensor");
                                 JSONObject toiletObject = toiletArray.getJSONObject(0);
                                 String toilet = toiletObject.getString("result");
+                                String ttime = toiletObject.getString("time");
+                                //kitchen_sensor
+                                JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
+                                JSONObject kitchenObject = kitchenArray.getJSONObject(0);
+                                String kitchen = kitchenObject.getString("result");
+                                String ktime = kitchenObject.getString("time");
 
                                 if (room.equals("1") || kitchen.equals("1") || toilet.equals("1")) {
+                                    Log.d("서비스 비상시", "경고!");
                                     //System.out.println("!!경고!! " + " 방: " + room + " 주방: " + kitchen + " 화장실: " + toilet);
-                                    if(room.equals("1")) {r = "방";}
-                                    if(kitchen.equals("1")) {k = "주방";}
-                                    if(toilet.equals("1")){t = "화장실";}
+                                    if(room.equals("1")) {
+                                        r = "방";
+                                        times[0] = rtime;
+                                    }
 
-                                    result1 = "1";
-                                    if (result2.equals("0")) {sendNotification(r, k, t);}
+                                    if(toilet.equals("1")) {
+                                        t = "화장실";
+                                        times[1] = ttime;
+                                    }
 
+                                    if(kitchen.equals("1")) {
+                                        k = "주방";
+                                        times[2] = ktime;
+                                    }
+
+                                    sendNotification(r, k, t);
                                 } else {
-                                    result1 = "0";
+                                    Log.d("서비스 평상시", "문제 없음");
                                 }
 
-                                Thread.sleep(1000);
-                            } catch (JSONException | InterruptedException e ) {
+                                Intent alertintent = new Intent(getApplicationContext(), MainActivity.class);
+                                alertintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                alertintent.putExtra("rtime", times[0]);
+                                alertintent.putExtra("ttime", times[1]);
+                                alertintent.putExtra("ktime", times[2]);
+                                startActivity(alertintent);
+                            } catch (JSONException e ) {
                                 e.printStackTrace();
                             }
                         }
@@ -110,7 +129,14 @@ public class BackgroundService extends Service {
                     SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
                     RequestQueue queue = Volley.newRequestQueue(BackgroundService.this);
                     queue.add(sensorMeasureRequest);
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+
             }
         }).start();
 
@@ -131,7 +157,7 @@ public class BackgroundService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         builder.setSmallIcon(R.drawable.ic_siren)
                 .setContentTitle("경고!")
-                .setContentText("비정상적인 수치가 감지되었습니다!("+r+" "+k+" "+t+")")
+                .setContentText("비정상적인 수치가 감지되었습니다!("+a+" "+b+" "+c+")")
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(1, builder.build());

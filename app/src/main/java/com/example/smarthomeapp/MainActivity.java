@@ -4,26 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
@@ -33,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout home_ly;
     BottomNavigationView bottomNavigationView;
     Fragment homeFragment, settingFragment;
+
+    Bundle bundle = new Bundle();
+    FragmentManager manager = getSupportFragmentManager();
+    FragmentTransaction transaction = manager.beginTransaction();
+
+    String[] alerts = new String[3];
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -53,6 +51,28 @@ public class MainActivity extends AppCompatActivity {
             startForegroundService(intent);
         }
 
+        Intent passedIntent = getIntent();
+        processCommand(passedIntent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        processCommand(intent);
+        super.onNewIntent(intent);
+    }
+
+    private void processCommand(Intent intent) {
+        Log.d("서비스 data", "서비스로부터 데이터 받아옴");
+        if (intent != null) {
+            alerts[0] = intent.getStringExtra("rtime");
+            bundle.putString("roomAlert", alerts[0]);
+
+            alerts[1] = intent.getStringExtra("ttime");
+            bundle.putString("toiletAlert", alerts[1]);
+
+            alerts[2] = intent.getStringExtra("ktime");
+            bundle.putString("kitchenAlert", alerts[2]);
+        }
     }
 
     //뒤로 키 2번 누르면 종료
@@ -77,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.tab_home: {
                     homeFragment = new HomeFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, homeFragment)
-                            .commit();
+                    homeFragment.setArguments(bundle);
+
+                    transaction.replace(R.id.home_ly, homeFragment).commit();
                     return true;
                 }
                 case R.id.tab_menu: {
@@ -90,9 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 case R.id.tab_setting: {
                     settingFragment = new SettingFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, settingFragment)
-                            .commit();
+                    transaction.replace(R.id.home_ly, settingFragment).commit();
                     return true;
                 }
             }
