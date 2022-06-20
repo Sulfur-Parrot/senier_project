@@ -1,6 +1,5 @@
 package com.example.smarthomeapp;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
-    private Button  btn_room, btn_toilet, btn_kitchen;
+    private Button  btn_room, btn_toilet, btn_kitchen, btn_back;
     private LineChart sensor_chart;
     BottomNavigationView bottomNavigationView;
 
@@ -43,11 +41,11 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        SettingListener();
 
         btn_room = findViewById(R.id.btn_room);
         btn_toilet = findViewById(R.id.btn_toilet);
         btn_kitchen = findViewById(R.id.btn_kitchen);
+        btn_back = findViewById(R.id.btn_back);
         sensor_chart = findViewById(R.id.sensor_chart);
 
         btn_room.setOnClickListener(new View.OnClickListener() {
@@ -73,11 +71,11 @@ public class MenuActivity extends AppCompatActivity {
                             JSONArray roomArray = jsonObject.getJSONArray("room_sensor");
 
 
-                            for (int i = 0; i < 10; i ++) {
+                            for (int i = 9; i >= 0; i--) {
                                 JSONObject roomObject = roomArray.getJSONObject(i);
                                 String vib_room = roomObject.getString("vibaration");
                                 room_v = Float.parseFloat(vib_room);
-                                entries.add(new Entry(i+1, room_v));
+                                entries.add(new Entry(10 - i, room_v));
                             }
 
                             LineDataSet lineDataSet = new LineDataSet(entries, "Vibration");
@@ -149,16 +147,16 @@ public class MenuActivity extends AppCompatActivity {
                             JSONArray toiletArray = jsonObject.getJSONArray("toilet_sensor");
 
 
-                            for (int i = 0; i < 10; i ++) {
+                            for (int i = 9; i >= 0; i--) {
                                 JSONObject toiletObject = toiletArray.getJSONObject(i);
 
                                 String vib_toilet = toiletObject.getString("vibaration");
                                 toilet_v = Float.parseFloat(vib_toilet);
-                                entries_vib.add(new Entry(i+1, toilet_v));
+                                entries_vib.add(new Entry(10-i, toilet_v));
 
                                 String move_toilet = toiletObject.getString("movement");
                                 toilet_m = Float.parseFloat(move_toilet);
-                                entries_move.add(new Entry(i+1, toilet_m * 300));
+                                entries_move.add(new Entry(10-i, toilet_m));
                             }
                             LineData linedata = new LineData();
 
@@ -249,20 +247,20 @@ public class MenuActivity extends AppCompatActivity {
                             JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
 
 
-                            for (int i = 0; i < 10; i ++) {
+                            for (int i = 9; i >= 0; i--) {
                                 JSONObject kitchenObject = kitchenArray.getJSONObject(i);
 
                                 String gas1_kitchen = kitchenObject.getString("Mq2");
                                 kitchen_gas1 = Float.parseFloat(gas1_kitchen);
-                                entries_gas1.add(new Entry(i+1, kitchen_gas1));
+                                entries_gas1.add(new Entry(10-i, kitchen_gas1));
 
                                 String gas2_kitchen = kitchenObject.getString("Mq5");
                                 kitchen_gas2 = Float.parseFloat(gas2_kitchen);
-                                entries_gas2.add(new Entry(i+1, kitchen_gas2));
+                                entries_gas2.add(new Entry(10-i, kitchen_gas2));
 
                                 String gas3_kitchen = kitchenObject.getString("Mq7");
                                 kitchen_gas3 = Float.parseFloat(gas3_kitchen);
-                                entries_gas3.add(new Entry(i+1, kitchen_gas3));
+                                entries_gas3.add(new Entry(10-i, kitchen_gas3));
                             }
                             LineData linedata = new LineData();
 
@@ -345,25 +343,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void SettingListener() {
-        //선택 리스너 등록
-        bottomNavigationView.setOnNavigationItemSelectedListener(new MenuActivity.TabSelectedListener());
-    }
-
-
-    class TabSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.tab_backhome: {
-                    Intent intent = new Intent(MenuActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
-            return false;
-        }
+        });
+
     }
 }

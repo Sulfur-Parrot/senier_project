@@ -3,6 +3,7 @@ package com.example.smarthomeapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -28,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BackKeyHandler backKeyHandler = new BackKeyHandler(this);
 
-    LinearLayout home_ly;
+    FrameLayout home_ly;
     BottomNavigationView bottomNavigationView;
+    Fragment homeFragment, settingFragment;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         init(); //객체 정의
         SettingListener(); //리스너 등록
 
+
         //처음 시작할 탭 설정
         bottomNavigationView.setSelectedItemId(R.id.tab_home);
 
@@ -49,49 +53,6 @@ public class MainActivity extends AppCompatActivity {
             startForegroundService(intent);
         }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                System.out.println(response);
-                                JSONObject jsonObject = new JSONObject(response);
-
-
-                                JSONArray roomArray = jsonObject.getJSONArray("room_sensor");
-                                JSONObject roomObject = roomArray.getJSONObject(9);
-                                String room_r = roomObject.getString("result");
-
-                                JSONArray toiletArray = jsonObject.getJSONArray("toilet_sensor");
-                                JSONObject toiletObject = toiletArray.getJSONObject(9);
-                                String toilet_r = toiletObject.getString("result");
-
-                                JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
-                                JSONObject kitchenObject = kitchenArray.getJSONObject(9);
-                                String kitchen_r = kitchenObject.getString("result");
-
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    };
-                    SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                    queue.add(sensorMeasureRequest);
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
     }
 
     //뒤로 키 2번 누르면 종료
@@ -115,18 +76,22 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.tab_home: {
+                    homeFragment = new HomeFragment();
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, new HomeFragment())
+                            .replace(R.id.home_ly, homeFragment)
                             .commit();
                     return true;
                 }
                 case R.id.tab_menu: {
                     Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
+                    finish();
+                    break;
                 }
                 case R.id.tab_setting: {
+                    settingFragment = new SettingFragment();
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, new SettingFragment())
+                            .replace(R.id.home_ly, settingFragment)
                             .commit();
                     return true;
                 }
