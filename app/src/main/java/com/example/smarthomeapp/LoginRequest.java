@@ -1,35 +1,30 @@
 package com.example.smarthomeapp;
 
-import com.google.gson.annotations.SerializedName;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
+import java.util.Map;
 
-//DTO 받아오기
-public class LoginRequest {
+public class LoginRequest extends StringRequest {
 
-    /*@SerializedName("email")
-    public String email;
+    //서버 url 설정(php파일 연동)
+    final static private String URL = "http://220.149.148.40/login.php";
+    private Map<String, String> map;
 
-    @SerializedName("password")
-    public String passwd;
 
-    public String getEmail(){
-        return email;
-    }
-    public String getPasswd(){
-        return passwd;
-    }
+    public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
 
-    public void setEmail(String email){
-        this.email = email;
-    }
-    public void setPasswd(String passwd){
-        this.passwd = passwd;
+        map = new HashMap<>();
+        map.put("email", userID);
+        map.put("password", userPassword);
     }
 
-    public LoginRequest(String email, String passwd){
-        this.email = email;
-        this.passwd = passwd;*/
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return map;
+    }
 }
-
- //필요 없을 듯?

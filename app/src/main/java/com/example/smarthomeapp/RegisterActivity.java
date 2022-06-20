@@ -10,11 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-/*
+///*
 public class RegisterActivity extends AppCompatActivity {
-    private EditText et_id, et_pass, et_name, et_age;
+    private EditText et_id, et_pass;
     private Button btn_register;
 
     @Override
@@ -23,15 +27,15 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // 아이디 값 찾아주기
-        et_id = findViewById(R.id.et_id);
-        et_pass = findViewById(R.id.et_pass);
+        et_id = findViewById(R.id.register_id);
+        et_pass = findViewById(R.id.register_password);
 
         // 회원가입 버튼 클릭 시 수행
         btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // EditText에 현재 입력되어있는 값을 get(가져온다)해온다.
+                // EditText에 현재 입력되어있는 값을 가져온다.
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
 
@@ -63,4 +67,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-}*/
+}//*/
