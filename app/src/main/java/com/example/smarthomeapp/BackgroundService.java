@@ -49,8 +49,8 @@ public class BackgroundService extends Service {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("알림 타이틀")
-                .setContentText("알림 설명")
+                .setContentTitle("스마트홈 알림")
+                .setContentText("센서에서 비정상적인 값이 측정될 경우 알림이 울립니다.")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -100,21 +100,16 @@ public class BackgroundService extends Service {
                                     result1 = "0";
                                 }
 
-                            } catch (JSONException e) {
+                                Thread.sleep(1000);
+                            } catch (JSONException | InterruptedException e ) {
                                 e.printStackTrace();
                             }
                         }
                     };
 
-                    SensorResultRequest sensorResultRequest = new SensorResultRequest(responseListener);
+                    SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
                     RequestQueue queue = Volley.newRequestQueue(BackgroundService.this);
-                    queue.add(sensorResultRequest);
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    queue.add(sensorMeasureRequest);
                 }
             }
         }).start();
@@ -127,7 +122,6 @@ public class BackgroundService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
