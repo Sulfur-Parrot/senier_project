@@ -2,18 +2,21 @@ package com.example.smarthomeapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout home_ly;
     BottomNavigationView bottomNavigationView;
     Fragment homeFragment, settingFragment;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
