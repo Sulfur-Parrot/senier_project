@@ -5,32 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#00BBBB"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/logo"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="60dp"
-            android:layout_weight="1">
-        </ImageView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="어서와 경남대는 처음이지?"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"/>
-
-    </RelativeLayout>
 
     <EditText
         android:id="@+id/login_id"
