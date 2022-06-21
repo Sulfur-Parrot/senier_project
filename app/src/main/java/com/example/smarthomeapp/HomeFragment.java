@@ -34,15 +34,6 @@ public class HomeFragment extends Fragment {
         btn_safety = (Button) rootView.findViewById(R.id.btn_safety);
         btn_refresh = (Button) rootView.findViewById(R.id.btn_refresh);
 
-        alerts[0] = "방: " + getArguments().getString("roomAlert");
-        alerts[1] = "화장실: " + getArguments().getString("toiletAlert");
-        alerts[2] = "주방: " + getArguments().getString("kitchenAlert");
-
-        if(!alerts[0].equals("방: null")) alert_room.setText(alerts[0]);
-        if(!alerts[1].equals("화장실: null")) alert_toilet.setText(alerts[1]);
-        if(!alerts[2].equals("주방: null")) alert_kitchen.setText(alerts[2]);
-        Log.d("프래그먼트", "프래그먼트로 값 들어옴");
-
         btn_119.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

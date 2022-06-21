@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
     Bundle bundle = new Bundle();
     FragmentManager manager = getSupportFragmentManager();
-    FragmentTransaction transaction = manager.beginTransaction();
 
     String[] alerts = new String[3];
 
@@ -41,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
         init(); //객체 정의
         SettingListener(); //리스너 등록
 
+        SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Activity.MODE_PRIVATE);
+
+        alerts[0] = sharedPreferences.getString("room", null);
+        alerts[1] = sharedPreferences.getString("toilet", null);
+        alerts[2] = sharedPreferences.getString("kitchen", null);
+
+        bundle.putString("roomAlert", alerts[0]);
+        bundle.putString("toiletAlert", alerts[1]);
+        bundle.putString("kitchenAlert", alerts[2]);
+
 
         //처음 시작할 탭 설정
         bottomNavigationView.setSelectedItemId(R.id.tab_home);
@@ -51,28 +62,6 @@ public class MainActivity extends AppCompatActivity {
             startForegroundService(intent);
         }
 
-        Intent passedIntent = getIntent();
-        processCommand(passedIntent);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        processCommand(intent);
-        super.onNewIntent(intent);
-    }
-
-    private void processCommand(Intent intent) {
-        Log.d("서비스 data", "서비스로부터 데이터 받아옴");
-        if (intent != null) {
-            alerts[0] = intent.getStringExtra("rtime");
-            bundle.putString("roomAlert", alerts[0]);
-
-            alerts[1] = intent.getStringExtra("ttime");
-            bundle.putString("toiletAlert", alerts[1]);
-
-            alerts[2] = intent.getStringExtra("ktime");
-            bundle.putString("kitchenAlert", alerts[2]);
-        }
     }
 
     //뒤로 키 2번 누르면 종료
@@ -92,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class TabSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            FragmentTransaction transaction = manager.beginTransaction();
             switch (menuItem.getItemId()) {
                 case R.id.tab_home: {
                     homeFragment = new HomeFragment();

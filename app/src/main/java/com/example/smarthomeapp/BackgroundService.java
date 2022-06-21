@@ -126,15 +126,7 @@ public class BackgroundService extends Service {
                                 } else {
                                     Log.d("서비스", "평상시");
                                 }
-
-                                Intent alertintent = new Intent(getApplicationContext(), MainActivity.class);
-                                alertintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                                        Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                                        Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                alertintent.putExtra("rtime", times[0]);
-                                alertintent.putExtra("ttime", times[1]);
-                                alertintent.putExtra("ktime", times[2]);
-                                startActivity(alertintent);
+                                
                             } catch (JSONException e ) {
                                 e.printStackTrace();
                             }
