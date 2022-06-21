@@ -126,7 +126,7 @@ public class BackgroundService extends Service {
                                 } else {
                                     Log.d("서비스", "평상시");
                                 }
-                                
+
                             } catch (JSONException e ) {
                                 e.printStackTrace();
                             }
