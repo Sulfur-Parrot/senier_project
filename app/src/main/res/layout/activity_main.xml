@@ -9,7 +9,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#00BBBB"
+        android:background="@color/blue_500"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         >
@@ -25,7 +25,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="어서와 경남대는 처음이지?"
+            android:text="SmartHome 안전관리 시스템"
+            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_weight="1"/>

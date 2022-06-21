@@ -22,7 +22,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="119 전화하기"
             android:textSize="20dp" />
@@ -34,7 +35,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="CPR 방법"
             android:textSize="20dp" />
@@ -52,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="생활안전요령"
             android:textSize="20dp" />
@@ -61,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="새로고침"
             android:textSize="20dp" />

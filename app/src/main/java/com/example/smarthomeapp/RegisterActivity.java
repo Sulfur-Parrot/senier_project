@@ -16,7 +16,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-///*
+
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_id, et_pass;
     private Button btn_register;
@@ -67,4 +68,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-}//*/
+}
