@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmarthomeApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">DisasterMessage</string>
+    <string name="check_network">네트워크 상태를 확인해 주세요</string>
+    <string name="backpressed_finish">\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.</string>
 </resources>
