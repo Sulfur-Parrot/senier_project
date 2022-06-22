@@ -126,17 +126,17 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="@color/blue_500"
+            android:backgroundTint="#ff0000"
             android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="돌아가기"
+            android:text="로그 아웃"
             android:textSize="20dp" />
 
         <Button

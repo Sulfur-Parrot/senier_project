@@ -3,7 +3,9 @@ package com.example.smarthomeapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
-    private Button  btn_room, btn_toilet, btn_kitchen, btn_back;
+    private Button  btn_room, btn_toilet, btn_kitchen, btn_logout;
     private LineChart sensor_chart;
     BottomNavigationView bottomNavigationView;
 
@@ -45,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_room = findViewById(R.id.btn_room);
         btn_toilet = findViewById(R.id.btn_toilet);
         btn_kitchen = findViewById(R.id.btn_kitchen);
-        btn_back = findViewById(R.id.btn_back);
+        btn_logout = findViewById(R.id.btn_logout);
         sensor_chart = findViewById(R.id.sensor_chart);
 
         btn_room.setOnClickListener(new View.OnClickListener() {
@@ -343,10 +345,15 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                SharedPreferences sharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autoLoginEdit = sharedPreferences.edit();
+                autoLoginEdit.clear();
+                autoLoginEdit.apply();
+
+                Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

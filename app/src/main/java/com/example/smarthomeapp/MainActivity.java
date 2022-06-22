@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.tab_menu: {
                     Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
-                    finish();
+                    onPause();
                     break;
                 }
                 case R.id.tab_setting: {
