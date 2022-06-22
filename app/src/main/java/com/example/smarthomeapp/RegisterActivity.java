@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -39,12 +41,15 @@ public class RegisterActivity extends AppCompatActivity {
                 // EditText에 현재 입력되어있는 값을 가져온다.
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
+                String hashedPass = BCrypt.hashpw(userPass, BCrypt.gensalt(10));
+                Log.d("암호화", hashedPass);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
+                            System.out.println(jsonObject);
                             boolean success = jsonObject.getBoolean("success");
                             if (success) { // 회원등록에 성공한 경우
                                 Toast.makeText(getApplicationContext(),"회원 등록에 성공하였습니다.",Toast.LENGTH_SHORT).show();
@@ -61,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
                 // 서버로 Volley를 이용해서 요청을 함.
-                RegisterRequest registerRequest = new RegisterRequest(userID,userPass, responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(userID, hashedPass, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 

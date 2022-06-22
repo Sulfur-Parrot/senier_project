@@ -12,16 +12,15 @@ import java.util.Map;
 public class LoginRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
-    final static private String URL = "http://220.149.148.40/login.php";
+    final static private String URL = "http://220.149.148.40/php_login.php";
     private Map<String, String> map;
 
 
-    public LoginRequest(String userID, String userPassword, Response.Listener<String> listener) {
+    public LoginRequest(String userID, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("email", userID);
-        map.put("password", userPassword);
     }
 
     @Override
