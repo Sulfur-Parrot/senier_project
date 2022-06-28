@@ -58,18 +58,16 @@ public class BackgroundService extends Service {
             public void run() {
                 //여기에 지속적으로 돌아가야할 작업을 넣는다
                 String[] times = {"null", "null", "null"};
-                SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Service.MODE_PRIVATE);
-                SharedPreferences.Editor alertEdit = sharedPreferences.edit();
-
-                times[0] = sharedPreferences.getString("room", null);
-                times[1] = sharedPreferences.getString("toilet", null);
-                times[2] = sharedPreferences.getString("kitchen", null);
 
 
                 while(true) {
                     r = "";
                     k = "";
                     t = "";
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Service.MODE_PRIVATE);
+                    SharedPreferences.Editor alertEdit = sharedPreferences.edit();
+
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -99,23 +97,29 @@ public class BackgroundService extends Service {
                                     if(room.equals("1")) {
                                         r = "방";
                                         alertEdit.putString("room", rtime);
-                                        alertEdit.apply();
-                                        times[0] = sharedPreferences.getString("room", null);
+                                    } else {
+                                        alertEdit.putString("room", times[0]);
                                     }
 
                                     if(toilet.equals("1")) {
                                         t = "화장실";
                                         alertEdit.putString("toilet", ttime);
-                                        alertEdit.apply();
-                                        times[1] = sharedPreferences.getString("toilet", null);
+                                    } else {
+                                        alertEdit.putString("toilet", times[1]);
                                     }
 
                                     if(kitchen.equals("1")) {
                                         k = "주방";
                                         alertEdit.putString("kitchen", ktime);
-                                        alertEdit.apply();
-                                        times[2] = sharedPreferences.getString("kitchen", null);
+                                    } else {
+                                        alertEdit.putString("kitchen", times[2]);
                                     }
+
+                                    alertEdit.apply();
+
+                                    times[0] = sharedPreferences.getString("room", null);
+                                    times[1] = sharedPreferences.getString("toilet", null);
+                                    times[2] = sharedPreferences.getString("kitchen", null);
 
                                     sendNotification(r, k, t);
                                 } else {

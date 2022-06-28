@@ -41,17 +41,6 @@ public class MainActivity extends AppCompatActivity {
         init(); //객체 정의
         SettingListener(); //리스너 등록
 
-        SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Activity.MODE_PRIVATE);
-
-        alerts[0] = sharedPreferences.getString("room", null);
-        alerts[1] = sharedPreferences.getString("toilet", null);
-        alerts[2] = sharedPreferences.getString("kitchen", null);
-
-        bundle.putString("roomAlert", alerts[0]);
-        bundle.putString("toiletAlert", alerts[1]);
-        bundle.putString("kitchenAlert", alerts[2]);
-
-
         //처음 시작할 탭 설정
         bottomNavigationView.setSelectedItemId(R.id.tab_home);
 
@@ -87,6 +76,17 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.tab_home: {
                     homeFragment = new HomeFragment();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Activity.MODE_PRIVATE);
+
+                    alerts[0] = sharedPreferences.getString("room", null);
+                    alerts[1] = sharedPreferences.getString("toilet", null);
+                    alerts[2] = sharedPreferences.getString("kitchen", null);
+
+                    bundle.putString("roomAlert", alerts[0]);
+                    bundle.putString("toiletAlert", alerts[1]);
+                    bundle.putString("kitchenAlert", alerts[2]);
+
                     homeFragment.setArguments(bundle);
 
                     transaction.replace(R.id.home_ly, homeFragment).commit();

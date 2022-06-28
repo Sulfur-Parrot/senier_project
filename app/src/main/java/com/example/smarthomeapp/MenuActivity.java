@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +34,7 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
     private Button  btn_room, btn_toilet, btn_kitchen, btn_logout;
+    private TextView place;
     private LineChart sensor_chart;
     BottomNavigationView bottomNavigationView;
 
@@ -48,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_toilet = findViewById(R.id.btn_toilet);
         btn_kitchen = findViewById(R.id.btn_kitchen);
         btn_logout = findViewById(R.id.btn_logout);
+        place = findViewById(R.id.place);
         sensor_chart = findViewById(R.id.sensor_chart);
 
         btn_room.setOnClickListener(new View.OnClickListener() {
@@ -58,10 +61,8 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sensor_chart.invalidate();
                 sensor_chart.clear();
-                /*
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                */
+                place.setText("방");
+
                 List<Entry> entries = new ArrayList<>();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -136,6 +137,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sensor_chart.invalidate();
                 sensor_chart.clear();
+                place.setText("화장실");
 
                 List<Entry> entries_vib = new ArrayList<>();
                 List<Entry> entries_move = new ArrayList<>();
@@ -235,6 +237,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sensor_chart.invalidate();
                 sensor_chart.clear();
+                place.setText("주방");
 
                 List<Entry> entries_gas1 = new ArrayList<>();
                 List<Entry> entries_gas2 = new ArrayList<>();
