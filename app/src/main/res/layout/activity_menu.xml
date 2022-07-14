@@ -118,8 +118,8 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/sensor_chart"
+        <ListView
+            android:id="@+id/list_alert"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
