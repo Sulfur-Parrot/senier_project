@@ -2,31 +2,21 @@ package com.example.smarthomeapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
@@ -37,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment homeFragment, settingFragment;
 
+    Bundle bundle = new Bundle();
+    FragmentManager manager = getSupportFragmentManager();
 
+    String[] alerts = new String[3];
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -47,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         init(); //객체 정의
         SettingListener(); //리스너 등록
-
 
         //처음 시작할 탭 설정
         bottomNavigationView.setSelectedItemId(R.id.tab_home);
@@ -77,27 +69,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class TabSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            FragmentTransaction transaction = manager.beginTransaction();
             switch (menuItem.getItemId()) {
                 case R.id.tab_home: {
                     homeFragment = new HomeFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, homeFragment)
-                            .commit();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Activity.MODE_PRIVATE);
+
+                    alerts[0] = sharedPreferences.getString("room", null);
+                    alerts[1] = sharedPreferences.getString("toilet", null);
+                    alerts[2] = sharedPreferences.getString("kitchen", null);
+
+                    bundle.putString("roomAlert", alerts[0]);
+                    bundle.putString("toiletAlert", alerts[1]);
+                    bundle.putString("kitchenAlert", alerts[2]);
+
+                    homeFragment.setArguments(bundle);
+
+                    transaction.replace(R.id.home_ly, homeFragment).commit();
                     return true;
                 }
                 case R.id.tab_menu: {
                     Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
-                    finish();
+                    onPause();
                     break;
                 }
                 case R.id.tab_setting: {
                     settingFragment = new SettingFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.home_ly, settingFragment)
-                            .commit();
+                    transaction.replace(R.id.home_ly, settingFragment).commit();
                     return true;
                 }
             }

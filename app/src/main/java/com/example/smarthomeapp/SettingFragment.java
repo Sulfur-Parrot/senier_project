@@ -4,16 +4,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+
 
 public class SettingFragment extends PreferenceFragmentCompat {
 
     private static final String SETTING_PUSH = "Push_notification";
     private static final String SETTING_VIB = "Vib_notification";
     private static final String SETTING_LANGUAGE = "Language";
-    private static final String SETTING_LOGOUT = "Logout";
     SharedPreferences prefs;
 
     @Override
@@ -33,8 +32,6 @@ public class SettingFragment extends PreferenceFragmentCompat {
                     } else if (key.equals(SETTING_VIB)) {
                         Log.d("TAG", key + "SELECTED");
                     } else if (key.equals(SETTING_LANGUAGE)) {
-                        Log.d("TAG", key + "SELECTED");
-                    } else if (key.equals(SETTING_LOGOUT)) {
                         Log.d("TAG", key + "SELECTED");
                     }
 

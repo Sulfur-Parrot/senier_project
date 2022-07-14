@@ -11,7 +11,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#00BBBB"
+        android:background="@color/blue_500"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
         >
@@ -27,7 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="어서와 경남대는 처음이지?"
+            android:text="SmartHome 안전관리 시스템"
+            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_weight="1"/>
@@ -49,7 +50,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="방"
             android:textSize="25dp" />
@@ -61,7 +63,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="주방"
             android:textSize="25dp" />
@@ -79,7 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:text="화장실"
             android:textSize="25dp" />
@@ -90,10 +94,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="@color/blue_500"
+            android:textColor="@color/white"
             android:text=""
             android:textSize="25dp"
             android:visibility="invisible" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="장소"
+            android:textSize="20dp"/>
     </LinearLayout>
 
     <FrameLayout
@@ -103,8 +118,8 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/sensor_chart"
+        <ListView
+            android:id="@+id/list_alert"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -121,16 +136,17 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            android:backgroundTint="#0095FF"
+            android:backgroundTint="#ff0000"
+            android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="돌아가기"
+            android:text="로그 아웃"
             android:textSize="20dp" />
 
         <Button

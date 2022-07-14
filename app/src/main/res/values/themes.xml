@@ -17,7 +17,7 @@
     <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="android:windowBackground">@drawable/loadingbar</item>   <!-- 로딩화면에 나올 이미지 -->
+        <item name="android:windowBackground">@drawable/loading</item>   <!-- 로딩화면에 나올 이미지 -->
     </style>
 
 </resources>
