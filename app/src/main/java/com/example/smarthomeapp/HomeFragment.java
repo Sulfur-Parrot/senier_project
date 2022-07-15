@@ -19,18 +19,39 @@ public class HomeFragment extends Fragment {
         Log.d("프래그먼트", "홈 프래그먼트 실행");
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button btn_119, btn_cpr, btn_safety, btn_refresh;
-        TextView alert_room, alert_toilet, alert_kitchen;
+        Button btn_119, btn_cpr, btn_safety;
+        TextView txt_where, txt_time, txt_countermeasure;
         String[] alerts = new String[3];
 
-        alert_room = rootView.findViewById(R.id.alert_room);
-        alert_toilet = rootView.findViewById(R.id.alert_toilet);
-        alert_kitchen = rootView.findViewById(R.id.alert_kitchen);
+        txt_where = rootView.findViewById(R.id.txt_where);
+        txt_time = rootView.findViewById(R.id.txt_time);
+        txt_countermeasure = rootView.findViewById(R.id.txt_countermeasure);
 
         btn_119 = (Button) rootView.findViewById(R.id.btn_119);
         btn_cpr = (Button) rootView.findViewById(R.id.btn_cpr);
         btn_safety = (Button) rootView.findViewById(R.id.btn_safety);
-        btn_refresh = (Button) rootView.findViewById(R.id.btn_refresh);
+
+        alerts[0] = getArguments().getString("roomAlert");
+        alerts[1] = getArguments().getString("toiletAlert");
+        alerts[2] = getArguments().getString("kitchenAlert");
+
+        if(alerts[0] != null || alerts[1] != null || alerts[2] != null) {
+            if (!alerts[0].equals("null")) {
+                txt_where.setText("방");
+                txt_time.setText(alerts[0]);
+                txt_countermeasure.setText("낙상사고 감지!\n환자가 발생하였다면 119에 우선 신고를 하시고 척추 손상 등이 있을지 모르니 환자를 움직이게 하지 마시고 호흡과 혈액순환을 확인하세요. 호흡만 없다면 기도를 유지하고 인공호흡을 실시하여야 합니다. 호흡과 혈액순환이 모두 없는 상태라면 cpr을 시행하여야 합니다.");
+            }
+            else if (!alerts[1].equals("null")) {
+                txt_where.setText("화장실");
+                txt_time.setText(alerts[1]);
+                txt_countermeasure.setText("낙상사고 감지!\n환자가 발생하였다면 119에 우선 신고를 하시고 척추 손상 등이 있을지 모르니 환자를 움직이게 하지 마시고 호흡과 혈액순환을 확인하세요.\n호흡만 없다면 기도를 유지하고 인공호흡을 실시하여야 합니다. 호흡과 혈액순환이 모두 없는 상태라면 cpr을 시행하여야 합니다.");
+            }
+            else if (!alerts[2].equals("null")) {
+                txt_where.setText("주방");
+                txt_time.setText(alerts[2]);
+                txt_countermeasure.setText("가스누출 감지!\n점화 코크, 중간 벨브, 용기 벨브(도시가스는 메인벨브)를 잠그고 창문과 출입문 등을 열어 환기를 시켜주세요.(LPG용기에서 누출되는 경우 누출 최소화를 위해 얇은 천(수건 등)을 물에 적셔 누출부위에 붙여주세요) LPG는 공기보다 무거우므로 빗자루로 쓸어주듯이 밖으로 내보내야합니다.\n선풍기나 환풍기는 스파크를 일으킬 수 있으므로 사용하지 마시고, 주변의 불씨(전열기구 포함)를 멀리하세요.\n이후 가스 공급 업체나 도시가스 대행업소에 연락하여 안전조치 후에 사용해주세요.");
+            }
+        }
 
         btn_119.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,19 +74,6 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent fall = new Intent(Intent.ACTION_VIEW, Uri.parse("https://easylaw.go.kr/CSP/CnpClsMainBtr.laf?popMenu=ov&csmSeq=690&ccfNo=2&cciNo=1&cnpClsNo=1"));
                 startActivity(fall);
-            }
-        });
-
-        btn_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alerts[0] = "방: " + getArguments().getString("roomAlert");
-                alerts[1] = "화장실: " + getArguments().getString("toiletAlert");
-                alerts[2] = "주방: " + getArguments().getString("kitchenAlert");
-
-                if(!alerts[0].equals("방: null")) alert_room.setText(alerts[0]);
-                if(!alerts[1].equals("화장실: null")) alert_toilet.setText(alerts[1]);
-                if(!alerts[2].equals("주방: null")) alert_kitchen.setText(alerts[2]);
             }
         });
 

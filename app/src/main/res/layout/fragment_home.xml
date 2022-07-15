@@ -60,54 +60,81 @@
             android:text="생활안전요령"
             android:textSize="20dp" />
         <Button
-            android:id="@+id/btn_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:backgroundTint="@color/blue_500"
             android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="새로고침"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/alert_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="15dp"
-            android:hint="새로고침을 누를 시 최근 경고 표시"
-            android:textColor="@color/black" />
+            android:textColor="@color/blue_700"
+            android:textSize="25dp"
+            android:text="위치"/>
+
+        <TextView
+            android:id="@+id/txt_where"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="이상 발생 위치"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/alert_toilet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="15dp"
-            android:hint="새로고침을 누를 시 최근 경고 표시"
-            android:textColor="@color/black" />
+            android:textColor="@color/blue_700"
+            android:textSize="25dp"
+            android:text="발생 시각"/>
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="이상 발생 시각"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:id="@+id/alert_kitchen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="15dp"
-            android:hint="새로고침을 누를 시 최근 경고 표시"
-            android:textColor="@color/black" />
+            android:textColor="@color/blue_700"
+            android:textSize="25dp"
+            android:text="대처법"/>
+
+        <TextView
+            android:id="@+id/txt_countermeasure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:scrollbars="vertical"
+            android:hint="이상 발생 시 대처법"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
     </LinearLayout>
 
 </LinearLayout>

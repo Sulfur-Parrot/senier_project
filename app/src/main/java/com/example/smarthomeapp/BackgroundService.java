@@ -42,7 +42,7 @@ public class BackgroundService extends Service {
             manager.createNotificationChannel(serviceChannel);
         }
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, LoginActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("스마트홈 알림")
@@ -57,8 +57,6 @@ public class BackgroundService extends Service {
             @Override
             public void run() {
                 //여기에 지속적으로 돌아가야할 작업을 넣는다
-                String[] times = {"null", "null", "null"};
-
 
                 while(true) {
                     r = "";
@@ -92,34 +90,30 @@ public class BackgroundService extends Service {
                                 String ktime = kitchenObject.getString("time");
 
                                 if (room.equals("1") || kitchen.equals("1") || toilet.equals("1")) {
-                                    Log.d("서비스", "비상시");
-                                    //System.out.println("!!경고!! " + " 방: " + room + " 주방: " + kitchen + " 화장실: " + toilet);
+                                    Log.d("서비스", "이상 감지");
+
                                     if(room.equals("1")) {
                                         r = "방";
                                         alertEdit.putString("room", rtime);
                                     } else {
-                                        alertEdit.putString("room", times[0]);
+                                        alertEdit.putString("room", "null");
                                     }
 
                                     if(toilet.equals("1")) {
                                         t = "화장실";
                                         alertEdit.putString("toilet", ttime);
                                     } else {
-                                        alertEdit.putString("toilet", times[1]);
+                                        alertEdit.putString("toilet", "null");
                                     }
 
                                     if(kitchen.equals("1")) {
                                         k = "주방";
                                         alertEdit.putString("kitchen", ktime);
                                     } else {
-                                        alertEdit.putString("kitchen", times[2]);
+                                        alertEdit.putString("kitchen", "null");
                                     }
 
                                     alertEdit.apply();
-
-                                    times[0] = sharedPreferences.getString("room", null);
-                                    times[1] = sharedPreferences.getString("toilet", null);
-                                    times[2] = sharedPreferences.getString("kitchen", null);
 
                                     sendNotification(r, k, t);
                                 } else {
@@ -159,7 +153,7 @@ public class BackgroundService extends Service {
 
     public void sendNotification(String a, String b, String c) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, LoginActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         builder.setSmallIcon(R.drawable.ic_siren)
                 .setContentTitle("경고!")
