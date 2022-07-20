@@ -10,9 +10,13 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -38,6 +42,7 @@ public class MenuActivity extends AppCompatActivity {
     private TextView place;
     private ListView list_alert;
     BottomNavigationView bottomNavigationView;
+    SingerAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -54,6 +59,25 @@ public class MenuActivity extends AppCompatActivity {
         place = findViewById(R.id.place);
         list_alert = findViewById(R.id.list_alert);
 
+        //리스트뷰를 위한 어댑터
+        ListView listView = (ListView) findViewById(R.id.list_alert);
+        adapter = new SingerAdapter();
+
+        adapter.addItem(new SingerItem("","",R.drawable.));
+        //리스트 뷰에 어댑터 설정
+        listView.setAdapter(adapter);
+        //이벤트 처리 리스너 설정
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                SingerItem item = (SingerItem) adapter.getItem(position);
+                Toast.makeText(getApplicationContext(), "발생위치 : " + item.getPlace(), Toast.LENGTH_LONG).show();
+            }
+        }); */
+
+        //버튼 눌렀을 때 우측 이름, 발생 시간이 리스트뷰에 포함되도록 처리
+        //Button button = (Button) findViewById()
+        //어댑터 끝
         btn_room.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -141,4 +165,49 @@ public class MenuActivity extends AppCompatActivity {
         });
 
     }
+
+    class SingerAdapter extends BaseAdapter{
+        ArrayList<SingerItem> items = new ArrayList<SingerItem>();
+
+        @Override
+        public int getCount() {
+            return items.size();
+        }
+
+        public void addItem(SingerItem item) {
+            items.add(item);
+        }
+
+        @Override
+        public Object getItem(int position){
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position){
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            //뷰 객체 재사용
+         SingerItemView view = null;
+         if (convertView == null) {
+             view = new SingerItemView(getApplicationContext());
+         } else {
+             view = (SingerItemView) convertView;
+         }
+
+         SingerItem item = items.get(position);
+
+         view.setPlace(item.getPlace());
+         view.setTime(item.getTime());
+         view.setImage(item.getResID());
+
+         return view;
+
+        }
+
+    }
+
 }
