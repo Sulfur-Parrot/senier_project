@@ -39,7 +39,6 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
     private Button  btn_room, btn_toilet, btn_kitchen, btn_logout;
-    private TextView place;
     private ListView list_alert;
     BottomNavigationView bottomNavigationView;
     SingerAdapter adapter;
@@ -56,16 +55,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_toilet = findViewById(R.id.btn_toilet);
         btn_kitchen = findViewById(R.id.btn_kitchen);
         btn_logout = findViewById(R.id.btn_logout);
-        place = findViewById(R.id.place);
-        list_alert = findViewById(R.id.list_alert);
 
-        //리스트뷰를 위한 어댑터
-        ListView listView = (ListView) findViewById(R.id.list_alert);
-        adapter = new SingerAdapter();
-
-        adapter.addItem(new SingerItem("","",R.drawable.));
-        //리스트 뷰에 어댑터 설정
-        listView.setAdapter(adapter);
         //이벤트 처리 리스너 설정
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -82,23 +72,38 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                place.setText("방");
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            list_alert = findViewById(R.id.list_alert);
+
+                            //리스트뷰를 위한 어댑터
+                            ListView listView = (ListView) findViewById(R.id.list_alert);
+                            adapter = new SingerAdapter();
+
                             System.out.println(response);
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray roomArray = jsonObject.getJSONArray("room_sensor");
+
+                            for(int i = 0;i < 10; i++) {
+                                JSONObject roomObject = roomArray.getJSONObject(i);
+                                String time = roomObject.getString("time");
+                                adapter.addItem(new SingerItem("방", time, R.drawable.ic_knockdown));
+                            }
+
+                            //리스트 뷰에 어댑터 설정
+                            listView.setAdapter(adapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
-                SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
+                AlertListRequest alertListRequest = new AlertListRequest(responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MenuActivity.this);
-                queue.add(sensorMeasureRequest);
+                queue.add(alertListRequest);
             }
         });
 
@@ -106,23 +111,38 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                place.setText("화장실");
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            list_alert = findViewById(R.id.list_alert);
+
+                            //리스트뷰를 위한 어댑터
+                            ListView listView = (ListView) findViewById(R.id.list_alert);
+                            adapter = new SingerAdapter();
+
                             System.out.println(response);
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONArray toiletArray = jsonObject.getJSONArray("toilet_sensor");
+                            JSONArray roomArray = jsonObject.getJSONArray("toilet_sensor");
+
+                            for(int i = 0;i < 10; i++) {
+                                JSONObject roomObject = roomArray.getJSONObject(i);
+                                String time = roomObject.getString("time");
+                                adapter.addItem(new SingerItem("화장실", time, R.drawable.ic_knockdown));
+                            }
+
+                            //리스트 뷰에 어댑터 설정
+                            listView.setAdapter(adapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
-                SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
+                AlertListRequest alertListRequest = new AlertListRequest(responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MenuActivity.this);
-                queue.add(sensorMeasureRequest);
+                queue.add(alertListRequest);
             }
         });
 
@@ -130,23 +150,38 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                place.setText("주방");
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            list_alert = findViewById(R.id.list_alert);
+
+                            //리스트뷰를 위한 어댑터
+                            ListView listView = (ListView) findViewById(R.id.list_alert);
+                            adapter = new SingerAdapter();
+
                             System.out.println(response);
                             JSONObject jsonObject = new JSONObject(response);
-                            JSONArray kitchenArray = jsonObject.getJSONArray("kitchen_sensor");
+                            JSONArray roomArray = jsonObject.getJSONArray("kitchen_sensor");
+
+                            for(int i = 0;i < 10; i++) {
+                                JSONObject roomObject = roomArray.getJSONObject(i);
+                                String time = roomObject.getString("time");
+                                adapter.addItem(new SingerItem("주방", time, R.drawable.ic_gasleak));
+                            }
+
+                            //리스트 뷰에 어댑터 설정
+                            listView.setAdapter(adapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
-                SensorMeasureRequest sensorMeasureRequest = new SensorMeasureRequest(responseListener);
+                AlertListRequest alertListRequest = new AlertListRequest(responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MenuActivity.this);
-                queue.add(sensorMeasureRequest);
+                queue.add(alertListRequest);
             }
         });
 

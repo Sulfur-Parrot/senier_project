@@ -7,7 +7,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:textSize="40dp"
-        android:src="@drawable/waring"/>
+        android:src="@drawable/ic_warning"/>
 
     <LinearLayout
         android:layout_width="match_parent"
