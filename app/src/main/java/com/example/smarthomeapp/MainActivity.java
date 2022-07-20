@@ -79,14 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     homeFragment = new HomeFragment();
 
                     SharedPreferences sharedPreferences = getSharedPreferences("alertTime", Activity.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
                     alerts[0] = sharedPreferences.getString("room", null);
                     alerts[1] = sharedPreferences.getString("toilet", null);
                     alerts[2] = sharedPreferences.getString("kitchen", null);
-
-                    editor.clear();
-                    editor.apply();
 
                     bundle.putString("roomAlert", alerts[0]);
                     bundle.putString("toiletAlert", alerts[1]);
