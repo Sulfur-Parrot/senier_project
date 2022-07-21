@@ -42,6 +42,7 @@ public class MenuActivity extends AppCompatActivity {
     private ListView list_alert;
     BottomNavigationView bottomNavigationView;
     SingerAdapter adapter;
+    String accident;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -56,14 +57,23 @@ public class MenuActivity extends AppCompatActivity {
         btn_kitchen = findViewById(R.id.btn_kitchen);
         btn_logout = findViewById(R.id.btn_logout);
 
+        ListView listView = (ListView) findViewById(R.id.list_alert);
+
         //이벤트 처리 리스너 설정
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 SingerItem item = (SingerItem) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "발생위치 : " + item.getPlace(), Toast.LENGTH_LONG).show();
+                if(item.getPlace()=="방"){
+                    accident = "낙상사고";
+                } else if(item.getPlace() == "주방") {
+                    accident = "가스누출사고";
+                } else if(item.getPlace() == "화장실"){
+                    accident = "낙상사고";
+                }
+                Toast.makeText(getApplicationContext(), item.getTime() +"에 " + item.getPlace() + "에서 " + accident +"가 감지되었습니다." , Toast.LENGTH_LONG).show();
             }
-        }); */
+        });
 
         //버튼 눌렀을 때 우측 이름, 발생 시간이 리스트뷰에 포함되도록 처리
         //Button button = (Button) findViewById()
