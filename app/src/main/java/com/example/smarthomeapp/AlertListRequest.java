@@ -12,7 +12,7 @@ import java.util.Map;
 public class AlertListRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
-    final static private String URL = "http://220.149.148.40/php_appalert.php";
+    final static private String URL = "http://172.30.7.98/php_appalert.php";
     private Map<String, String> map;
 
 

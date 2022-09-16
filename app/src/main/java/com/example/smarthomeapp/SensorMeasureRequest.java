@@ -12,7 +12,7 @@ import java.util.Map;
 public class SensorMeasureRequest extends StringRequest {
 
     //서버 url 설정(php파일 연동)
-    final static private String URL = "http://172.30.7.125/php_appconnection.php";
+    final static private String URL = "http://172.30.7.98/php_appconnection.php";
     private Map<String, String> map;
 
 
